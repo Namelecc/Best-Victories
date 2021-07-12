@@ -1,34 +1,36 @@
 import berserk
+session = berserk.TokenSession(token)
+client = berserk.Client(session=session)
 
 #___________________________________________________________
 
 token = "LICHESS API TOKEN" #Your lichess API token
 user = "TCF_Namelecc".casefold() #User that you want top x wins of
 variant = "rapid" #One of the below, exactly as written below
-#ultraBullet bullet blitz rapid classical correspondence chess960 crazyhouse antichess atomic horde kingOfTheHill racingKings threeCheck
+#ultraBullet "bullet "blitz rapid classical correspondence chess960 crazyhouse antichess atomic horde kingOfTheHill racingKings threeCheck
 leaderboard_number = 20 #Number of top wins you want
 
 #___________________________________________________________
 
-session = berserk.TokenSession(token)
-client = berserk.Client(session=session)
-
-stuff = client.games.export_by_player(user, rated = "true", perf_type = variant, moves = False)
+stuff = client.games.export_by_player(user, rated = "true", perf_type = variant, moves = False) #get rid of the rated argument entirely for both casual and rated
 games = list(stuff)
 ratings = ""
 users = ""
 for game in games:
     if 'winner' in game:
+        try:
         #print(game)
-        player_color = "black"
-        opponent_color = "white"
-        if game['players']['white']['user']['id'] == user: 
+            player_color = "black"
+            opponent_color = "white"
+            if game['players']['white']['user']['id'] == user: 
                 player_color = "white"
                 opponent_color = "black"
 
-        if player_color == game["winner"]:
-            ratings = ratings + f"{game['players'][opponent_color]['rating']} "
-            users = users + f"{game['players'][opponent_color]['user']['id']} "
+            if player_color == game["winner"]:
+                ratings = ratings + f"{game['players'][opponent_color]['rating']} "
+                users = users + f"{game['players'][opponent_color]['user']['id']} "
+        except:
+            pass
 rating_list = ratings.split()
 user_list = users.split()
 for repetition in range(len(rating_list)):
@@ -45,4 +47,4 @@ try:
         print(f"Rating: {rating_list[x]}, User: {user_list[x]}")
 
 except:
-    print("Decrease the number of top wins you want")
+    pass
