@@ -1,11 +1,16 @@
 import berserk
-token = "LICHESS API TOKEN" #Your lichess API token
 session = berserk.TokenSession(token)
 client = berserk.Client(session=session)
+
+#___________________________________________________________
+
+token = "LICHESS API TOKEN" #Your lichess API token
 user = "TCF_Namelecc".casefold() #User that you want top x wins of
 variant = "rapid" #One of the below, exactly as written below
 #ultraBullet "bullet "blitz rapid classical correspondence chess960 crazyhouse antichess atomic horde kingOfTheHill racingKings threeCheck
 leaderboard_number = 20 #Number of top wins you want
+
+#___________________________________________________________
 stuff = client.games.export_by_player(user, rated = "true", perf_type = variant, moves = False)
 games = list(stuff)
 ratings = ""
