@@ -12,3 +12,4 @@ Some people want to see more than just their top 5 victories in a variant (https
 7. Enter the name of the variant into the variable variable. Must be one of the following (written exactly as they are here): ultraBullet bullet blitz rapid classical correspondence chess960 crazyhouse antichess atomic horde kingOfTheHill racingKings threeCheck
 8. Enter the number of top wins you want into the leaderboard_number variable 
 9. Run the code... if things go wrong, please make an issue!
+10. This does take some time as exporting is throttled, so depending on the number of games you have in any given variant, this process could take a while (from a few minutes to an hour or so if you have a ton of games like say german11
