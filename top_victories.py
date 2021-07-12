@@ -1,6 +1,5 @@
 import berserk
-session = berserk.TokenSession(token)
-client = berserk.Client(session=session)
+
 
 #___________________________________________________________
 
@@ -11,6 +10,9 @@ variant = "rapid" #One of the below, exactly as written below
 leaderboard_number = 20 #Number of top wins you want
 
 #___________________________________________________________
+
+session = berserk.TokenSession(token)
+client = berserk.Client(session=session)
 
 stuff = client.games.export_by_player(user, rated = "true", perf_type = variant, moves = False) #get rid of the rated argument entirely for both casual and rated
 games = list(stuff)
